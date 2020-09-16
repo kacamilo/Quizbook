@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="word">
+	
+	<!-- 폴더리스트 가져오기 -->
+	<select id="getWords" parameterType="int" resultType="com.javaex.vo.WordVo">
+		<![CDATA[
+			select wordno, setno, nvl(word, ' ') as word, nvl(meaning, ' ') as meaning, wordimg, orderno
+			from word
+			where setNo = #{setNo}
+			order by orderno
+		]]>
+	</select>
+	
+	<!-- 카드 추가 -->
+	<insert id="createWord" parameterType="com.javaex.vo.WordVo">
+		<![CDATA[
+			insert into word values(wordNo.nextval, #{setNo}, #{word}, #{meaning}, '', #{orderNo})
+		]]>
+	</insert>
+	
+	<!-- 카드 업데이트 -->
+	<update id="updateWord" parameterType="com.javaex.vo.WordVo">
+		<![CDATA[
+			merge into word
+			using dual
+    			on (wordno = #{wordNo})
+			when matched then
+    			update set word = #{word}
+    			, meaning = #{meaning}
+			when not matched then
+    			insert (wordNo, setNo, word, meaning, wordImg, orderno) values(wordNo.nextval, #{setNo}, #{word}, #{meaning}, '', #{orderNo})
+		]]>
+	</update>
+	
+</mapper>

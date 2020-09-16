@@ -1,0 +1,136 @@
+@charset "UTF-8";
+
+/* 폰트적용 */
+@font-face {
+	font-family: "NotoSansKR-Regular";
+	src:url("fonts/NotoSansKR-Regular.otf");
+}
+
+@font-face {
+	font-family: "NotoSansKR-Bold";
+	src:url("fonts/NotoSansKR-Bold.otf");
+}
+/****************************************************************/
+/* 초기화 관련 ***************************************************/
+/****************************************************************/
+
+/* 여백 초기화 */
+body, div, ul, li, dl, dt, ol, h1, h2, h3, h4, h5, h6, input, fieldset,
+	legend, p, select, table, th, td, tr, textarea, button, form {
+	margin: 0;
+	padding: 0;
+}
+
+/* 바디정렬 */
+body {
+	text-align: center;
+}
+
+/* 타이틀 - 프로필수정 */
+#pro-title {
+	font-family: "NotoSansKR-Bold";
+	font-weight: bold;
+	font-size: 32px;
+} 
+
+/* 취소 확인 버튼  */
+.pro-btn{
+	width: 60px;
+	height: 35px;
+	background-color: #68CAC0;
+	font-family: "NotoSansKR-Bold";
+	font-size: 15px;
+	color: #FFFFFF;
+	border: 0px;
+	border-radius: 20px;
+}
+
+/* 사진 업로드 버튼 */
+.filebox label {
+  display: inline-block;
+  padding: .5em .75em;
+  color: #fff;
+  font-size: inherit;
+  line-height: normal;
+  vertical-align: middle;
+  background-color: #5cb85c;
+  cursor: pointer;
+  border: 1px solid #4cae4c;
+  border-radius: .25em;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+}
+
+.filebox label:hover {
+  background-color: #6ed36e;
+}
+
+.filebox label:active {
+  background-color: #367c36;
+}
+
+.filebox input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}		
+/* ==============사진 업로드 버튼=========== */
+
+/* 이름 입력창 */
+.form-name { 
+  padding:0px 0px 0px 10px;
+  margin-top: 10px;
+  border-radius: 8px; 
+  width:300px; 
+  height:40px; 
+  border:1px solid #8E8D8D;
+  font-family:"NotoSansKR-regular", sans-serif;
+  font-size:16px;
+  }
+
+/* 직업 드롭박스 */
+#browsers{
+	width: 150px;
+	height:40px;
+    background-color: white;
+    border: 1px solid #8E8D8D;
+    border-radius: 10px;
+    display: inline-block;
+    font-family: "NotoSansKR-Regular";
+	font-size: 15px;
+	padding: 20px;
+
+	margin: AUTO;
+/* 아래화살표 수정 CSS*/
+	background-image:
+	linear-gradient(45deg, transparent 60%, gray 50%),
+	linear-gradient(135deg, gray 50%, transparent 50%),
+	radial-gradient(#ddd 70%, transparent 72%);
+	background-position:
+	calc(100% - 20px) calc(1em + 2px),
+	calc(100% - 15px) calc(1em + 2px),
+	calc(100% - .5em) .5em;
+	background-size:
+	5px 5px,
+	5px 5px,
+	1.5em 1.5em;
+	background-repeat: no-repeat;
+}
+
+/* 드롭박스 */
+#dLabel {
+	width: 150px;
+	height:40px;
+    background-color: white;
+    border: 1px solid #8E8D8D;
+    border-radius: 10px;
+    display: inline-block;
+    font-family: "NotoSansKR-Regular";
+	font-size: 15px;
+	padding: 20px;
+}

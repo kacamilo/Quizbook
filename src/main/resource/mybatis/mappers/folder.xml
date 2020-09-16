@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="folder">
+	
+	<!-- 폴더리스트 가져오기 -->
+	<select id="getList" parameterType="int" resultType="com.javaex.vo.FolderVo">
+		<![CDATA[
+			select *
+			from folder
+			where userNo = #{userNo}
+			order by groupno, orderno
+		]]>
+	</select>
+	
+	<!-- 기본폴더 불러오기 -->
+	<select id="getFolder" parameterType="int" resultType="com.javaex.vo.FolderVo">
+		<![CDATA[
+			select *
+			from folder
+			where folderNo = (select min(folderNo)
+                  			  from folder
+                  			  where userNo = #{userNo})
+		]]>
+	</select>
+	
+	<!-- 폴더이름 불러오기 -->
+	<select id="getFolderName" parameterType="int" resultType="com.javaex.vo.FolderVo">
+		<![CDATA[
+			select folderName
+			from folder
+			where folderNo = #{folderNo}
+		]]>
+	</select>
+	
+	<!-- 최상위 폴더만들기 -->
+	<insert id="createRootFolder" parameterType="com.javaex.vo.FolderVo">
+		<![CDATA[
+			insert into folder values(FOLDERNO.nextval, #{userNo}, #{folderName}, FOLDERNO.nextval, 0, 1, 0, sysdate)
+		]]>
+	</insert>
+	
+	<!-- 폴더만들기 orderNo 조정(폴더만들기 전에 실행) -->
+	<update id="orderNoModify" parameterType="com.javaex.vo.FolderVo">
+		<![CDATA[
+			update folder
+			set orderno = orderno + 1
+			where groupno = #{groupNo} and orderno >= #{orderNo}
+		]]>
+	</update>
+	
+	<!-- 폴더만들기 -->
+	<insert id="createFolder" parameterType="com.javaex.vo.FolderVo">
+		<![CDATA[
+			insert into folder values(FOLDERNO.nextval, #{userNo}, #{folderName}, #{groupNo}, #{folderNo}, #{orderNo}, #{depth}, sysdate)
+		]]>
+	</insert>
+	
+	
+	
+	<!-- 폴더삭제 -->
+	<delete id="deleteFolder" parameterType="int">
+		<![CDATA[
+			delete from folder
+			where folderNo = #{folderNo}
+		]]>
+	</delete>
+	
+	<!-- 폴더삭제 orderNo 조정(폴더삭제 전에 실행) -->
+	<update id="orderNoDelete" parameterType="com.javaex.vo.FolderVo">
+		<![CDATA[
+			update folder
+			set orderno = orderno - 1
+			where groupno = #{groupNo} and orderno >= #{orderNo}
+		]]>
+	</update>
+	
+</mapper>
